@@ -27,8 +27,8 @@
 				<td>${pvo.company }</td>
 			</tr>
 			<tr>
-				<td><a href="pbc?action=delete&personId=${pvo.personId }">삭제</a></td>
-				<td><a href="pbc?action=updateForm&personId=${pvo.personId }">수정</a></td>
+				<td><a href="./delete?personId=${pvo.personId }">삭제</a></td>
+				<td><a href="./updateForm?personId=${pvo.personId }">수정</a></td>
 			</tr>
 		</table>
 		<br/>

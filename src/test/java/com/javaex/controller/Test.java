@@ -25,7 +25,8 @@ public class Test {
 	// method
 	///////////////////////
 	@RequestMapping(value="/print", method=RequestMethod.GET)
-	public String testPrint(@RequestParam(value="age", required=false, defaultValue="-1") int age, @RequestParam String name) {
+	public String testPrint(@RequestParam(value="age", required=false, defaultValue="-1") int age, 
+							@RequestParam String name) {
 		System.out.println("testPrint" +  " "+ age + " " + name);
 		return "/WEB-INF/views/index.jsp";
 	}

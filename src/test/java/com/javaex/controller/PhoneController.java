@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.dao.PhoneDao;
 import com.javaex.vo.PersonVo;
@@ -45,7 +46,7 @@ public class PhoneController {
 		return "redirect:/phone/list";
 	}
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(Model  model) {
 		System.out.println("/phone/list");
 		
@@ -58,5 +59,37 @@ public class PhoneController {
 		
 		// jsp정보를 리턴한다 (view)
 		return "/WEB-INF/views/list.jsp";
+	}
+	
+	@RequestMapping(value="delete", method={RequestMethod.GET, RequestMethod.POST})
+	public String delete(@RequestParam int personId) {
+		System.out.println("/phone/delete");
+		
+		PhoneDao phoneDao = new PhoneDao();
+		phoneDao.deletePerson(personId);
+		
+		return "redirect:/phone/list";
+	}
+	
+	@RequestMapping("updateForm")
+	public String updateForm(Model model, @RequestParam int personId) {
+		System.out.println("/phone/updateForm");
+		
+		PhoneDao phoneDao = new PhoneDao();
+		PersonVo pvo = phoneDao.getPerson(personId);
+		
+		model.addAttribute("pvo", pvo);
+		
+		return "/WEB-INF/views/updateForm.jsp";
+	}
+	
+	@RequestMapping("update")
+	public String udpate(@ModelAttribute PersonVo pvo) {
+		System.out.println("/phone/update");
+		
+		PhoneDao phoneDao = new PhoneDao();
+		phoneDao.updatePerson(pvo);
+
+		return "redirect:/phone/list";
 	}
 }
